@@ -1,0 +1,55 @@
+{
+    "name": "@limetech/stencil-router",
+    "version": "0.0.0-development",
+    "description": "A lightweight hash-based router for Stencil applications",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.js",
+    "es2015": "dist/esm/index.mjs",
+    "es2017": "dist/esm/index.mjs",
+    "types": "dist/types/index.d.ts",
+    "collection": "dist/collection/collection-manifest.json",
+    "collection:main": "dist/collection/index.js",
+    "unpkg": "dist/stencil-router/stencil-router.esm.js",
+    "files": [
+        "dist/",
+        "loader/"
+    ],
+    "scripts": {
+        "build": "stencil build",
+        "test": "stencil test --spec",
+        "test:watch": "stencil test --spec --watch",
+        "lint": "eslint src --ext .ts,.tsx",
+        "lint:fix": "eslint src --ext .ts,.tsx --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Lundalogik/stencil-router.git"
+    },
+    "keywords": [
+        "stencil",
+        "router",
+        "web-components",
+        "hash-router"
+    ],
+    "author": "Lime Technologies",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Lundalogik/stencil-router/issues"
+    },
+    "homepage": "https://github.com/Lundalogik/stencil-router#readme",
+    "peerDependencies": {
+        "@stencil/core": "^4.0.0"
+    },
+    "devDependencies": {
+        "@stencil/core": "^4.22.2",
+        "@stencil/eslint-plugin": "^1.0.0",
+        "@types/jest": "^29.5.0",
+        "@typescript-eslint/eslint-plugin": "^8.0.0",
+        "@typescript-eslint/parser": "^8.0.0",
+        "eslint": "^9.0.0",
+        "jest": "^29.7.0",
+        "jest-cli": "^29.7.0",
+        "prettier": "^3.0.0",
+        "typescript": "~5.5.4"
+    }
+}

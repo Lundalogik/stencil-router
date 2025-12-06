@@ -1,0 +1,53 @@
+name: Pull Request Checks
+on: [pull_request, merge_group]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    - uses: ./.github/actions/set-up-node
+    - run: npm ci
+    - run: npm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    - uses: ./.github/actions/set-up-node
+    - run: npm ci
+    - run: npm run build
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+    - uses: ./.github/actions/set-up-node
+    - run: npm ci
+    - run: npm test
+
+  commitlint:
+    name: Commitlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        if: github.actor != 'dependabot[bot]' && github.event_name != 'merge_group'
+      - uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
+        if: github.actor != 'dependabot[bot]' && github.event_name != 'merge_group'
+
+  autosquash:
+    name: Block Autosquash Commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block Autosquash Commits
+        if: github.event_name != 'merge_group'
+        uses: xt0rted/block-autosquash-commits-action@79880c36b4811fe549cfffe20233df88876024e7 # v2.2.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
