@@ -1,6 +1,6 @@
 {
     "name": "@limetech/stencil-router",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A lightweight hash-based router for Stencil applications",
     "main": "dist/index.cjs.js",
     "module": "dist/index.js",
@@ -34,7 +34,7 @@
     "author": "Lime Technologies",
     "license": "Apache-2.0",
     "publishConfig": {
-      "access": "public"
+        "access": "public"
     },
     "bugs": {
         "url": "https://github.com/Lundalogik/stencil-router/issues"
