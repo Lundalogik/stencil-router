@@ -23,6 +23,7 @@ jobs:
     - uses: ./.github/actions/set-up-node
     - run: npm ci
     - run: npm run build
+    - run: npm run build # Build twice as workaround for Stencil bug
 
   test:
     name: Test
