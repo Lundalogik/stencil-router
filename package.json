@@ -1,6 +1,6 @@
 {
     "name": "@limetech/stencil-router",
-    "version": "0.0.0-development",
+    "version": "1.0.0",
     "description": "A lightweight hash-based router for Stencil applications",
     "main": "dist/index.cjs.js",
     "module": "dist/index.js",
