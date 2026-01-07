@@ -51,3 +51,20 @@ jobs:
         uses: xt0rted/block-autosquash-commits-action@79880c36b4811fe549cfffe20233df88876024e7 # v2.2.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  automerge:
+    needs: [lint, build, test, autosquash]
+    if: github.event.pull_request.head.repo.owner.login == 'Lundalogik' && github.actor == 'dependabot[bot]' && github.event_name != 'merge_group'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Automerge
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_TOKEN: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+        run: |
+          curl -L -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $MERGE_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/Lundalogik/stencil-router/pulls/$PR_NUMBER/merge \
+            -d '{"merge_method":"rebase"}'
