@@ -26,8 +26,8 @@ jobs:
           @semantic-release/git@10.0.1
           conventional-changelog-conventionalcommits@5.0.0
       env:
-        GITHUB_TOKEN: ${{ secrets.CREATE_RELEASE }}
+        GITHUB_TOKEN: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
         GH_USERNAME: lime-opensource
-        GH_TOKEN: ${{ secrets.CREATE_RELEASE }}
+        GH_TOKEN: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         CI: true
