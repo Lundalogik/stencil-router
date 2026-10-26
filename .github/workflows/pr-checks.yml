@@ -8,7 +8,7 @@ concurrency:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: ./.github/actions/set-up-node
@@ -17,7 +17,7 @@ jobs:
 
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: ./.github/actions/set-up-node
@@ -26,7 +26,7 @@ jobs:
 
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - uses: ./.github/actions/set-up-node
@@ -35,7 +35,7 @@ jobs:
 
   commitlint:
     name: Commitlint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         if: github.actor != 'dependabot[bot]' && github.event_name != 'merge_group'
@@ -44,7 +44,7 @@ jobs:
 
   autosquash:
     name: Block Autosquash Commits
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Block Autosquash Commits
         if: github.event_name != 'merge_group'
@@ -55,7 +55,7 @@ jobs:
   automerge:
     needs: [lint, build, test, autosquash]
     if: github.event.pull_request.head.repo.owner.login == 'Lundalogik' && github.actor == 'dependabot[bot]' && github.event_name != 'merge_group'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Automerge
         env:
